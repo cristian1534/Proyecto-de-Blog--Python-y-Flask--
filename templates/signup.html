@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8">
+        <title>Blog Python</title>
+        <link rel="shortcut icon" href="../static/images/Python.ico">
+        <link rel="stylesheet"  href="../static/css/index.css">
+    </head>
+
+<body text="White" background="../static/images/Python3.jpg" ><center><h1>SIGN UP:</h1></center>
+
+        <center>
+            <img src="../static/images/Signup.png" hspace="15" vspace="0" style="float:center;" width="200">
+
+        <form method="post" action="{{url_for('signup')}}">
+                         <h2>Escribe tu Nombre:</h2>
+            <input type="text" name="nombre" size="50" maxlength="50">
+
+                        <h2>Escribe tu Usuario:</h2>
+            <input type="text" name="username" size="50" maxlength="50">
+
+                         <h2>Escribe tu Contraseña:</h2>
+             <input type="password" name="password" size="50" maxlength="50">
+        <br/>
+            <br/>
+
+
+        <input type="submit" name="submit" value="Enviar">
+        <input type="reset" value="Borrar">
+            <br/>
+              <br/>
+        </form>
+            <a href="http://localhost:5000/">Click aqui para ir al Homepage</a>
+
+        </center>
+</body>
+</html>

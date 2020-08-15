@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8">
+        <title>Blog Python</title>
+        <link rel="shortcut icon" href="../static/images/Python.ico">
+        <link rel="stylesheet"  href="../static/css/index.css">
+
+    </head>
+            <img src="../static/images/Python Logo.png" hspace="15" vspace="0" style="float:left;" width="250">
+    <!--Presentacion del Blog-->
+    <body text="White" background="../static/images/Python3.jpg" marginwidth="15"><center><h1>Bienvenidos a Algoritmo Python!</h1></center>
+
+                 <center>
+                         <div>
+                             <h4>
+                            {%with messages = get_flashed_messages()%}
+                            {%if messages%}
+                            {%for message in messages%}
+                            {{message}}
+                            {%endfor%}
+                            {%endif%}
+                            {%endwith%}
+                             </h4>
+
+                         </div>
+                 </center>
+
+
+         <br/>
+    <center><h2>El Blog donde TODOS aprendemos como Programadores Junior.</h2></center>
+            <div class="menu-bar">
+                 <ul>
+                     <li><a href="http://localhost:5000/cursos">Cursos</a></li>
+                     <li><a href="http://localhost:5000/contacto">Contacto</a></li>
+                     <li><a href="http://localhost:5000/articulos">Articulos</a></li>
+                     <li><a href="http://localhost:5000/login">Login</a></li>
+                      <li><a href="{{url_for('logout')}}">Logout</a></li>
+                     <li><a href="http://localhost:5000/signup">Registrarse</a></li>
+
+                 </ul>
+            </div>
+        <nav>
+            <div>
+                <img src="../static/images/Cristian.jpg" hspace="5" vspace="5" style="float:left;" width="150" border="2 px black">
+        <p>
+            Mi nombre es Cristian Machuca, soy estudiante de Desarrollo de Software y me encanta programar en Python,
+            es por ello que decidi crear este humilde Blog para poder, en forma de comunidad para Beginners,
+            permitir las Consultas y Aportes entre todos; asi desarrollar mayor conocimiento en este excelente
+            lenguaje de Programacion,<b>Python</b>.<br/>
+            Como Framework para iniciar en Web me encanta <b>Flask</b>, tambien me gusta compartir codigos en <b>GitHub</b> y me interesa
+            crecer en desarrollo <b>Backend</b>.<br/>
+            Una vez mas, te doy la Bienvenida a <b>Algoritmos Python!</b>.
+
+        </p>
+            </div>
+        </nav>
+
+
+    <!--COMIENZO DEL FORMULARIO POST-->
+           <nav>
+               <h3>ACA TE DEJO UNA BREVE INTRODUCCION AL LENGUAJE PYTHON Y SUS CARACTERISTICAS:</h3>
+               <center>
+
+               <video src="../static/images/PythonVideo.mp4" controls  width="700" height="300" border="2 px black"></video>
+
+               </center>
+          <h2>ESCRIBE UN POST:</h2>
+
+            <form class="login-form" action="{{url_for('crear_post')}}"  method="post">
+                <input type="text" name="titulo" placeholder="Titulo del Post"><br/><br/>
+                <textarea name="texto" cols="80" rows="10"></textarea>
+
+                <input type="submit" name="submit" value="Enviar">
+                <input type="reset" value="Borrar">
+            </form>
+
+           </nav>
+<!--FIN DEL FORMULARIO POST-->
+
+            {%for post in posts %}
+            <section>
+                <h3 class="post-title">{{post.titulo}}</h3>
+                <p class="date">Publicado en: {{post.fecha.strftime('%m/%d/%Y')}}</p>
+                <p>{{post.texto}}</p>
+
+
+            <form class="delete-button" action="{{url_for('borrar')}}" method="post">
+                <button value="{{post.id}}" name="post_id">Borrar Post</button>
+
+            {%endfor%}
+
+            </form>
+            </section>
+
+        </body>
+</html>

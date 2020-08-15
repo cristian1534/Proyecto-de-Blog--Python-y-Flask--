@@ -1,0 +1,30 @@
+body
+{
+background-size: cover;
+}
+
+.menu-bar
+{
+background: white;
+text-align: center;
+
+}
+
+.menu-bar ul
+{
+display: inline-flex;
+list-style: none;
+}
+
+.menu-bar ul li
+{
+margin: 15px;
+padding: 15px;
+}
+
+
+
+
+
+
+

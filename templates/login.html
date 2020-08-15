@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8">
+        <title>Blog Python</title>
+        <link rel="shortcut icon" href="../static/images/Python.ico">
+        <link rel="stylesheet"  href="../static/css/index.css">
+    </head>
+<body text="white" background="../static/images/Python3.jpg" ><center><h1>LOGIN:</h1></center>
+
+        <center>
+            <div>
+
+            <img src="../static/images/Login.png" hspace="15" vspace="0" style="float:center;" width="200">
+
+                    <h4>
+                        {%with messages = get_flashed_messages()%}
+                        {%if messages%}
+                        {%for message in messages%}
+                        {{message}}
+                        {%endfor%}
+                        {%endif%}
+                        {%endwith%}
+                    </h4>
+            </div>
+
+
+<!--FORMULARIO LOGIN-->
+            <h2>Escribe tu Usuario:</h2>
+        <br/>
+            <br/>
+            <form method="post"  action="{{url_for('login')}}">
+        <input type="text" name="username" size="50" maxlength="50">
+        <br/>
+            <br/>
+                <h2>Escribe tu Contraseña:</h2>
+        <br/>
+            <br/>
+        <input type="password" name="password" size="50" maxlength="50">
+        <br/>
+             <br/>
+
+        <input type="submit" name="submit" value="Enviar">
+        <input type="reset" value="Borrar">
+            <br/>
+<!--FORMULARIO LOGIN-->
+            </form>
+            <a href="http://localhost:5000/">Click aqui para ir al Homepage</a>
+
+        </center>
+</body>
+</html>
