@@ -1,7 +1,11 @@
-from flask import Flask, render_template, redirect, request, flash, session, escape
+from flask import Flask, render_template, redirect, request, flash, session, escape, abort
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+from flask_admin import Admin, AdminIndexView
+from flask_admin.contrib.sqla import ModelView
+
+
 
 import os
 
@@ -13,10 +17,30 @@ blog.config["SQLALCHEMY_DATABASE_URI"] = dbdir
 blog.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(blog)
 
+
+
+
 class Users(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
+    admin = db.Column(db.Boolean, default=False)
+
+
+#ADMIN
+
+class ModelView(ModelView):
+    def is_accessible(self):
+        return True
+
+
+admin = Admin(blog, name='Algoritmo Python Blog')
+admin.add_view(ModelView(Users,db.session))
+
+
+#ADMIN
+
+
 
 class Post(db.Model):
     __tablename__ = "posts"
@@ -24,6 +48,7 @@ class Post(db.Model):
     titulo = db.Column(db.String, nullable=False)
     fecha = db.Column(db.DateTime, default=datetime.now)
     texto = db.Column(db.String, nullable=False)
+
 
 @blog.route("/")
 def index():
@@ -78,8 +103,6 @@ def login():
 
     return render_template('login.html')
 
-
-
 @blog.route('/home')
 def home():
     if 'username' in session:
@@ -107,6 +130,31 @@ def cursos():
 @blog.route('/articulos')
 def articulos():
     return render_template('articulos.html')
+
+@blog.errorhandler(404)
+@blog.route('/control', methods=['POST','GET'])
+def control():
+    try:
+        if request.method == 'POST':
+            user = Users.query.filter_by(username=request.form['username']).first()
+            if 'username' in session:
+                if user.username == 'admin':
+                     return redirect('/admin')
+
+
+            return render_template('/prohibido.html')
+        return render_template('/admin.html')
+
+    except:
+            return render_template('/not_found.html')
+
+@blog.errorhandler(404)
+def not_found(e):
+    return render_template('/not_found.html'),404
+
+@blog.errorhandler(403)
+def not_found(e):
+    return render_template('/prohibido.html'),403
 
 
 

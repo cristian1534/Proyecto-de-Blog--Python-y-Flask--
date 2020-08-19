@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+     <link rel="shortcut icon" href="../static/images/Python.ico">
+    <link rel="stylesheet"  href="../static/css/index.css">
+
+
+</head>
+        <link rel="stylesheet"  href="../static/css/index.css">
+
+
+<body text="White" background="../static/images/Python3.jpg"  >
+
+
+<center><h1>Clave de Administrador.</h1>
+
+
+
+        <form method="post" action="{{url_for('control')}}"><br/><br/>
+                <input type="text" name="username"><br/><br/>
+                <input type="submit" value="Acceder"><br/><br/>
+        </form>
+
+                     <h4>
+                            {%with messages = get_flashed_messages()%}
+                            {%if messages%}
+                            {%for message in messages%}
+                            {{message}}
+                            {%endfor%}
+                            {%endif%}
+                            {%endwith%}
+                    </h4>
+
+
+
+
+</center>
+</body>
+
+</html>
